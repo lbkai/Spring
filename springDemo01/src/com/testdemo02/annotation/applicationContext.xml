@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+            http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+            http://www.springframework.org/schema/tx
+            http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--使用context命名空间，通知spring扫描指定目录，进行注解的解析-->
+   <!--  <context:component-scan base-package="com.testdemo02.annotation"/> -->
+   
+   <!-- Spring自动装配Bean  autowire  对应的类需要写set方法  -->
+   <!-- 配置文件中，用于配置 personService 和 personAction 的 <bean> 元素中除了 id 和 class 属性以外，还增加了 autowire 属性，并将其属性值设置为 byName（按属性名称自动装配）。
+	默认情况下，配置文件中需要通过 ref 装配 Bean，但设置了 autowire="byName"，Spring 会在配置文件中自动寻找与属性名字 personDao 相同的 <bean>，找到后，
+	通过调用 setPersonDao（PersonDao personDao）方法将 id 为 personDao 的 Bean 注入 id 为 personService 的 Bean 中，
+	这时就不需要通过 ref 装配了。 -->
+	
+   <bean id="personDao" class="com.testdemo02.annotation.dao.PersonDaoImpl" />
+    <bean id="personService" class="com.testdemo02.annotation.service.PersonServiceImpl"
+        autowire="byName" />
+    <bean id="personController" class="com.testdemo02.annotation.controller.PersonController"
+        autowire="byName" />
+   
+</beans>
